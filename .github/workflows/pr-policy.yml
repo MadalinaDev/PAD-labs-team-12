@@ -1,0 +1,37 @@
+name: PR policy
+
+on:
+  pull_request:
+    branches: [main, dev]
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  policy:
+    name: PR policy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate pull request conventions
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const errors = [];
+            if (!/^(feat|fix|docs|test|refactor|chore)\([a-z0-9-]+\): .+/.test(pr.title)) {
+              errors.push('Title must use type(scope): summary.');
+            }
+            if (pr.base.ref === 'main') {
+              if (pr.head.ref !== 'dev' || pr.head.repo?.full_name !== context.payload.repository.full_name) {
+                errors.push('Milestone PRs into main must come from this repository\'s dev branch.');
+              }
+            } else if (!/^(feat|fix|docs|test|refactor|chore)\/lab-\d+\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(pr.head.ref)) {
+              errors.push('Task branches must use type/lab-N/kebab-description and target dev.');
+            }
+            for (const heading of ['Summary', 'Verification', 'Contract impact', 'Checklist']) {
+              const pattern = new RegExp(`^## ${heading}\\s*$`, 'm');
+              if (!pattern.test(pr.body || '')) errors.push(`Missing PR heading: ${heading}`);
+            }
+            if (errors.length) core.setFailed(errors.join('\n'));
+            else core.info('PR title, branch target and description follow the team policy.');
