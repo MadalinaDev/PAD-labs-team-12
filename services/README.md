@@ -10,6 +10,6 @@ git submodule update --init services/battle-service services/tamagotchi-service 
 
 The professor(s) need invitations to each private repository to inspect a full recursive checkout. Teammates retain access only to their own private services; shared contracts remain in the [public README](../README.md).
 
-For this local workspace, the submodule URLs are placeholder private remotes used to mirror the GitHub setup. Replace them with the actual private GitHub HTTPS URLs before pushing to the professor-facing repositories.
+These private repositories are published on GitHub as private repos and linked as submodules from the public CPR.
 
-See the [repository table](../README.md#repository-setup-and-lab-0-checklist) for the remaining service URLs and setup status.
+See the [repository table](../README.md#repository-setup-and-lab-0-checklist) for the current service URLs and setup status.
