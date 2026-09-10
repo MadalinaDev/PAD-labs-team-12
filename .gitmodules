@@ -4,3 +4,9 @@
 [submodule "services/tamagotchi-service"]
 	path = services/tamagotchi-service
 	url = https://github.com/Ekkusuu/tamagotchi-service.git
+[submodule "services/guild-service"]
+	path = services/guild-service
+	url = /Users/viktorianicologlo/private-repos/guild-service.git
+[submodule "services/notification-service"]
+	path = services/notification-service
+	url = /Users/viktorianicologlo/private-repos/notification-service.git
