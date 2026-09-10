@@ -22,7 +22,7 @@ Keep this file factual: checked means verified, not merely planned. Repository s
 
 ## Owner setup: branch protection
 
-Tracked in [issue #2](https://github.com/MadalinaDev/PAD-labs-team-12/issues/2). Inspection found no rulesets and no visible main-branch protection; current contributor permission is WRITE, not ADMIN.
+Tracked in [issue #2](https://github.com/MadalinaDev/tamagotchi-go-team-12/issues/2). Verified 2026-09-10: ruleset `protect-main-dev` (ID 22823249) is active for `refs/heads/main` and `refs/heads/dev`, blocking deletion and non-fast-forward updates and requiring one approving review. It does not yet require dismissal of stale approvals, resolved conversations, or the `PR policy` status check. Current contributor permission is WRITE, not ADMIN, so adjustments remain an owner action.
 
 Mădălina (or another administrator): Repository **Settings → Rules → Rulesets**, or **Branches → Add branch protection rule**.
 
@@ -41,7 +41,7 @@ Private repositories intentionally do not invite teammates. Do not copy the comm
 
 ## Project board
 
-Tracked in [issue #3](https://github.com/MadalinaDev/PAD-labs-team-12/issues/3). The user chose Mădălina to create/link the board because the current GitHub token lacks Project scopes. The [12 prepared issues](https://github.com/MadalinaDev/PAD-labs-team-12/issues) can be added directly to it.
+Tracked in [issue #3](https://github.com/MadalinaDev/tamagotchi-go-team-12/issues/3). The user chose Mădălina to create/link the board because the current GitHub token lacks Project scopes. The [12 prepared issues](https://github.com/MadalinaDev/tamagotchi-go-team-12/issues) can be added directly to it.
 
 An administrator or authorized Project owner can create **Tamagotchi Go — PAD Team 12** with statuses **Todo**, **In Progress**, **In Review**, **Done**. Link it through the repository's **Projects** tab. A Project may belong to a user or organization; it is not an ordinary Git repository file.
 
