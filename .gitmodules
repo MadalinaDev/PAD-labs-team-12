@@ -4,3 +4,9 @@
 [submodule "services/tamagotchi-service"]
 	path = services/tamagotchi-service
 	url = https://github.com/Ekkusuu/tamagotchi-service.git
+[submodule "services/package-registry-service"]
+	path = services/package-registry-service
+	url = git@github.com:sabinapopescu/package-registry-service.git
+[submodule "services/monster-raid-service"]
+	path = services/monster-raid-service
+	url = git@github.com:sabinapopescu/monster-raid-service.git
