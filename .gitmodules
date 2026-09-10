@@ -4,3 +4,9 @@
 [submodule "services/tamagotchi-service"]
 	path = services/tamagotchi-service
 	url = https://github.com/Ekkusuu/tamagotchi-service.git
+[submodule "services/user-management-service"]
+	path = services/user-management-service
+	url = https://github.com/MadalinaDev/user-management-service.git
+[submodule "services/map-service"]
+	path = services/map-service
+	url = https://github.com/MadalinaDev/map-service.git
