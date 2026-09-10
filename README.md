@@ -537,8 +537,8 @@ The common repository stores shared documentation, collaboration files and Git s
 | `services/tamagotchi-service` | [Ekkusuu/tamagotchi-service](https://github.com/Ekkusuu/tamagotchi-service) | Contract README published; linked as submodule |
 | `services/guild-service` | Awaiting Vica's URL | Pending |
 | `services/notification-service` | Awaiting Vica's URL | Pending |
-| `services/user-management-service` | Awaiting Mădălina's URL | Pending |
-| `services/map-service` | Awaiting Mădălina's URL | Pending |
+| `services/user-management-service` | [MadalinaDev/user-management-service](https://github.com/MadalinaDev/user-management-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule pending owner action |
+| `services/map-service` | [MadalinaDev/map-service](https://github.com/MadalinaDev/map-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule pending owner action |
 | `services/monster-raid-service` | Awaiting Sabina's URL | Pending |
 | `services/package-registry-service` | Awaiting Sabina's URL | Pending |
 
@@ -561,7 +561,7 @@ Clone the public repo normally to read the design. Initialize only the private s
 
 **Owner action: Mădălina will create/link the Project.** The current contributor token lacks Project permissions, and the team chose owner setup. See [the task backlog](docs/backlog.md) and [remaining setup actions](docs/lab-0-checklist.md). Add the Project URL here after linking it. A Markdown checklist alone does **not** meet the grade-9 GitHub Project requirement.
 
-[Twelve repository issues](https://github.com/MadalinaDev/PAD-labs-team-12/issues) are ready to add to the board: seven remaining Lab 0 coordination/setup tasks and five future implementation planning tasks. Project creation is tracked in [#3](https://github.com/MadalinaDev/PAD-labs-team-12/issues/3); branch protection in [#2](https://github.com/MadalinaDev/PAD-labs-team-12/issues/2).
+[Twelve repository issues](https://github.com/MadalinaDev/tamagotchi-go-team-12/issues) are ready to add to the board: seven remaining Lab 0 coordination/setup tasks and five future implementation planning tasks. Project creation is tracked in [#3](https://github.com/MadalinaDev/tamagotchi-go-team-12/issues/3); branch protection in [#2](https://github.com/MadalinaDev/tamagotchi-go-team-12/issues/2).
 
 ### Grade mapping
 

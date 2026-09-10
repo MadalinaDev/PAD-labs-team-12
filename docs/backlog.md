@@ -2,7 +2,7 @@
 
 Use these tasks to seed the linked GitHub Project. The service allocation and stack are confirmed. API and gameplay details are proposed and need review before implementation.
 
-The remaining work is also published as [repository issues #1–12](https://github.com/MadalinaDev/PAD-labs-team-12/issues). Lab 0 follow-ups are #1–7; future planning is #8–12. Sava's private READMEs and two real submodules have been prepared; the other six repository links remain pending. Mădălina can add the issues to the Project without recreating them.
+The remaining work is also published as [repository issues #1–12](https://github.com/MadalinaDev/tamagotchi-go-team-12/issues). Lab 0 follow-ups are #1–7; future planning is #8–12. Sava's private READMEs and two real submodules have been prepared; the other six repository links remain pending. Mădălina can add the issues to the Project without recreating them.
 
 | Milestone | Task | Owner | Acceptance criteria |
 | --- | --- | --- | --- |
