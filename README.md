@@ -537,8 +537,8 @@ The common repository stores shared documentation, collaboration files and Git s
 | `services/tamagotchi-service` | [Ekkusuu/tamagotchi-service](https://github.com/Ekkusuu/tamagotchi-service) | Contract README published; linked as submodule |
 | `services/guild-service` | Awaiting Vica's URL | Pending |
 | `services/notification-service` | Awaiting Vica's URL | Pending |
-| `services/user-management-service` | Awaiting Mădălina's URL | Pending |
-| `services/map-service` | Awaiting Mădălina's URL | Pending |
+| `services/user-management-service` | [MadalinaDev/user-management-service](https://github.com/MadalinaDev/user-management-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule pending owner action |
+| `services/map-service` | [MadalinaDev/map-service](https://github.com/MadalinaDev/map-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule pending owner action |
 | `services/monster-raid-service` | Awaiting Sabina's URL | Pending |
 | `services/package-registry-service` | Awaiting Sabina's URL | Pending |
 
