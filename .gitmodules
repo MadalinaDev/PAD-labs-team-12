@@ -1,0 +1,6 @@
+[submodule "services/battle-service"]
+	path = services/battle-service
+	url = https://github.com/Ekkusuu/battle-service.git
+[submodule "services/tamagotchi-service"]
+	path = services/tamagotchi-service
+	url = https://github.com/Ekkusuu/tamagotchi-service.git
