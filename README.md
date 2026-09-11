@@ -36,8 +36,8 @@ flowchart LR
     C[Package clients]
     U["User Management<br/>Java / Spring Boot"]
     M["Map<br/>Java / Spring Boot"]
-    P["Package Registry<br/>Java / Spring Boot"]
-    R["Monster Raid<br/>Java / Spring Boot"]
+    P["Package Registry<br/>TypeScript / NestJS"]
+    R["Monster Raid<br/>TypeScript / NestJS"]
     B["Battle<br/>TypeScript / NestJS"]
     T["Tamagotchi<br/>TypeScript / NestJS"]
     G["Guild<br/>TypeScript / NestJS"]
@@ -89,13 +89,12 @@ Every service has its **own PostgreSQL database and credentials**. Those eight d
 
 | Services | Language / framework | Storage | Transports |
 | --- | --- | --- | --- |
-| Battle, Tamagotchi | TypeScript / NestJS | PostgreSQL | REST/JSON, RabbitMQ |
+| Battle, Tamagotchi, Monster Raid, Package Registry | TypeScript / NestJS | PostgreSQL | REST/JSON, RabbitMQ |
 | Guild, Notification | TypeScript / NestJS | PostgreSQL | REST/JSON, RabbitMQ; Guild WebSockets; Notification Firebase SDK |
 | User Management, Map | Java / Spring Boot | PostgreSQL; PostGIS extension for Map | REST/JSON, RabbitMQ |
-| Monster Raid, Package Registry | Java / Spring Boot | PostgreSQL | REST/JSON, RabbitMQ |
 
-- **TypeScript / NestJS:** typed DTOs, validation and modules fit pet state and turn-based combat, while its WebSocket and Firebase integrations suit Vica's services. It needs more initial structure than a minimal HTTP library; runtime validation is still necessary because TypeScript types disappear at runtime.
-- **Java / Spring Boot:** transaction support and validation fit wallets, membership configuration and raid state. Java types also make cross-service DTOs explicit. Startup time, memory use and configuration are greater than lightweight frameworks. Using exactly these two languages balances the course requirement against tooling overhead.
+- **TypeScript / NestJS:** typed DTOs, validation and modules fit pet state and turn-based combat, while its WebSocket and Firebase integrations suit Vica's services; Sabina's raid/registry services also use it for the same typed-DTO and validation-module fit (immutable definitions, versioned care stats, raid state machines). It needs more initial structure than a minimal HTTP library; runtime validation is still necessary because TypeScript types disappear at runtime.
+- **Java / Spring Boot:** transaction support and validation fit wallets and PostGIS-backed concurrent writes. Java types also make cross-service DTOs explicit. Startup time, memory use and configuration are greater than lightweight frameworks. Two languages are used to satisfy the course requirement; the split follows each owner's tooling choice rather than an even service count per language.
 - **PostgreSQL:** transactions, unique constraints and row locking protect wallets, pet ownership and concurrent turns. Tamagotchi uses JSONB for different packages' care values, validated against Registry definitions. PostgreSQL per service simplifies tooling, but a single local server shares a failure domain.
 - **PostGIS:** indexed geographic distance queries avoid scanning every location. This adds an extension to operate. The six-metre proximity threshold is a gameplay approximation, not a promise of GPS precision.
 - **REST / JSON:** inspectable payloads, easy support in both stacks and immediate responses for turns and reads. More verbose than Protobuf; cross-service HTTP calls need bounded timeouts and cannot provide a distributed database transaction.
@@ -539,8 +538,8 @@ The common repository stores shared documentation, collaboration files and Git s
 | `services/notification-service` | [vikanicologlo/notification-service](https://github.com/vikanicologlo/notification-service) | Contract README published; linked as submodule |
 | `services/user-management-service` | [MadalinaDev/user-management-service](https://github.com/MadalinaDev/user-management-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule pending owner action |
 | `services/map-service` | [MadalinaDev/map-service](https://github.com/MadalinaDev/map-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule pending owner action |
-| `services/monster-raid-service` | Awaiting Sabina's URL | Pending |
-| `services/package-registry-service` | Awaiting Sabina's URL | Pending |
+| `services/monster-raid-service` | [sabinapopescu/monster-raid-service](https://github.com/sabinapopescu/monster-raid-service) | Contract README published; linked as submodule |
+| `services/package-registry-service` | [sabinapopescu/package-registry-service](https://github.com/sabinapopescu/package-registry-service) | Contract README published; linked as submodule |
 
 Do not add fake submodules or copy private source into public folders. A real submodule needs a remote URL and an existing commit. To add one from the common repo after the service owner has pushed its README:
 
