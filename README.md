@@ -34,12 +34,12 @@ Lab 0 plans a microservice backend where independently developed pet-care apps s
 ```mermaid
 flowchart LR
     C[Package clients]
-    U["User Management<br/>Java / Spring Boot"]
-    M["Map<br/>Java / Spring Boot"]
-    P["Package Registry<br/>Java / Spring Boot"]
-    R["Monster Raid<br/>Java / Spring Boot"]
-    B["Battle<br/>TypeScript / NestJS"]
-    T["Tamagotchi<br/>TypeScript / NestJS"]
+    U["User Management<br/>TypeScript / NestJS"]
+    M["Map<br/>TypeScript / NestJS"]
+    P["Package Registry<br/>TypeScript / NestJS"]
+    R["Monster Raid<br/>TypeScript / NestJS"]
+    B["Battle<br/>Go"]
+    T["Tamagotchi<br/>Go"]
     G["Guild<br/>TypeScript / NestJS"]
     N["Notification<br/>TypeScript / NestJS"]
     Q[(RabbitMQ)]
@@ -89,16 +89,16 @@ Every service has its **own PostgreSQL database and credentials**. Those eight d
 
 | Services | Language / framework | Storage | Transports |
 | --- | --- | --- | --- |
-| Battle, Tamagotchi | TypeScript / NestJS | PostgreSQL | REST/JSON, RabbitMQ |
+| Battle, Tamagotchi | Go | PostgreSQL | REST/JSON, RabbitMQ |
 | Guild, Notification | TypeScript / NestJS | PostgreSQL | REST/JSON, RabbitMQ; Guild WebSockets; Notification Firebase SDK |
-| User Management, Map | Java / Spring Boot | PostgreSQL; PostGIS extension for Map | REST/JSON, RabbitMQ |
-| Monster Raid, Package Registry | Java / Spring Boot | PostgreSQL | REST/JSON, RabbitMQ |
+| User Management, Map | TypeScript / NestJS | PostgreSQL; PostGIS extension for Map; Prisma ORM | REST/JSON, RabbitMQ |
+| Monster Raid, Package Registry | TypeScript / NestJS | PostgreSQL; Prisma ORM | REST/JSON, RabbitMQ |
 
-- **TypeScript / NestJS:** typed DTOs, validation and modules fit pet state and turn-based combat, while its WebSocket and Firebase integrations suit Vica's services. It needs more initial structure than a minimal HTTP library; runtime validation is still necessary because TypeScript types disappear at runtime.
-- **Java / Spring Boot:** transaction support and validation fit wallets, membership configuration and raid state. Java types also make cross-service DTOs explicit. Startup time, memory use and configuration are greater than lightweight frameworks. Using exactly these two languages balances the course requirement against tooling overhead.
+- **TypeScript / NestJS:** typed DTOs, validation and modules fit accounts, guilds, maps, raids and package configuration, while its WebSocket and Firebase integrations suit chat and notifications. Prisma simplifies PostgreSQL access across the six NestJS services. It needs more initial structure than a minimal HTTP library; runtime validation is still necessary because TypeScript types disappear at runtime.
+- **Go:** single static binary, low memory/startup time and goroutines fit turn-based battle validation and concurrent pet reservation/settlement. Explicit error handling and `database/sql` keep wallet-adjacent settlement logic auditable. Trade-off is more boilerplate than NestJS modules and a smaller Firebase/WebSocket ecosystem, which is why only the two combat-state services use it. Using exactly these two languages (Go + TypeScript) satisfies the course requirement against tooling overhead.
 - **PostgreSQL:** transactions, unique constraints and row locking protect wallets, pet ownership and concurrent turns. Tamagotchi uses JSONB for different packages' care values, validated against Registry definitions. PostgreSQL per service simplifies tooling, but a single local server shares a failure domain.
 - **PostGIS:** indexed geographic distance queries avoid scanning every location. This adds an extension to operate. The six-metre proximity threshold is a gameplay approximation, not a promise of GPS precision.
-- **REST / JSON:** inspectable payloads, easy support in both stacks and immediate responses for turns and reads. More verbose than Protobuf; cross-service HTTP calls need bounded timeouts and cannot provide a distributed database transaction.
+- **REST / JSON:** inspectable payloads, easy support in both stacks (Go and TypeScript) and immediate responses for turns and reads. More verbose than Protobuf; cross-service HTTP calls need bounded timeouts and cannot provide a distributed database transaction.
 - **RabbitMQ:** durable asynchronous notification and scheduling events decouple producers from consumer availability. Adds broker operation, duplicate handling and eventual consistency. Critical reward settlement uses explicit idempotent APIs and a persisted coordinator rather than assuming event delivery is exactly once.
 - **WebSockets:** required real-time guild chat without polling. Requires reconnect/history recovery and membership rechecks. Initial battles and raids use REST commands/polling; the assignment does not require a battle WebSocket.
 - **Firebase Cloud Messaging:** fulfills the topic's push requirement. Requires a Firebase project, server credentials, client registration/permission and platform configuration (HTTPS and a service worker for web). A successful Firebase send is not proof that a user saw the message; the Notification inbox is durable.
@@ -539,8 +539,8 @@ The common repository stores shared documentation, collaboration files and Git s
 | `services/notification-service` | [vikanicologlo/notification-service](https://github.com/vikanicologlo/notification-service) | Contract README published; linked as submodule |
 | `services/user-management-service` | [MadalinaDev/user-management-service](https://github.com/MadalinaDev/user-management-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule pending owner action |
 | `services/map-service` | [MadalinaDev/map-service](https://github.com/MadalinaDev/map-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule pending owner action |
-| `services/monster-raid-service` | Awaiting Sabina's URL | Pending |
-| `services/package-registry-service` | Awaiting Sabina's URL | Pending |
+| `services/monster-raid-service` | [sabinapopescu/monster-raid-service](https://github.com/sabinapopescu/monster-raid-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule linked, pending owner verification |
+| `services/package-registry-service` | [sabinapopescu/package-registry-service](https://github.com/sabinapopescu/package-registry-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule linked, pending owner verification |
 
 Do not add fake submodules or copy private source into public folders. A real submodule needs a remote URL and an existing commit. To add one from the common repo after the service owner has pushed its README:
 
