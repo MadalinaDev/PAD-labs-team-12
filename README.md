@@ -514,7 +514,7 @@ On victory, every participant with at least one accepted damaging attack receive
 This section defines the team policy. **Documented rules are not proof that GitHub enforcement is enabled**; owner actions are tracked in [the setup checklist](docs/lab-0-checklist.md).
 
 - `main`: presentation-ready milestones. `dev`: integration. Both are permanent.
-- Create task branches from updated `dev`: `<type>/lab-<number>/<short-kebab-description>`, where type is `feat`, `fix`, `docs`, `test`, `refactor` or `chore`.
+- Create task branches from updated `dev`: `<type>/<short-kebab-description>` with an optional `lab-<number>/` segment (for example `<type>/lab-0/<short-kebab-description>`), where type is `feat`, `fix`, `docs`, `test`, `refactor` or `chore`.
 - Use Conventional Commits: `docs(battle): define combat contracts`, `chore(submodules): link tamagotchi service`. Write your own contributions from your own account; review shared contracts with the service owners.
 - Task PRs target `dev`, use the [PR template](.github/pull_request_template.md), pass **PR policy**, and receive **one teammate approval** on the latest changes. Resolve review discussions before merging. Any changed cross-service contract needs review by an affected owner.
 - Squash task PRs into `dev`, then delete the task branch. Release PRs go **`dev` → `main` using a merge commit**, preserving the shared ancestry of the long-lived branches. Do not squash/rebase repeated releases between those branches.
@@ -535,8 +535,8 @@ The common repository stores shared documentation, collaboration files and Git s
 | --- | --- | --- |
 | `services/battle-service` | [Ekkusuu/battle-service](https://github.com/Ekkusuu/battle-service) | Contract README published; linked as submodule |
 | `services/tamagotchi-service` | [Ekkusuu/tamagotchi-service](https://github.com/Ekkusuu/tamagotchi-service) | Contract README published; linked as submodule |
-| `services/guild-service` | Awaiting Vica's URL | Pending |
-| `services/notification-service` | Awaiting Vica's URL | Pending |
+| `services/guild-service` | [vikanicologlo/guild-service](https://github.com/vikanicologlo/guild-service) | Contract README published; linked as submodule |
+| `services/notification-service` | [vikanicologlo/notification-service](https://github.com/vikanicologlo/notification-service) | Contract README published; linked as submodule |
 | `services/user-management-service` | [MadalinaDev/user-management-service](https://github.com/MadalinaDev/user-management-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule pending owner action |
 | `services/map-service` | [MadalinaDev/map-service](https://github.com/MadalinaDev/map-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule pending owner action |
 | `services/monster-raid-service` | Awaiting Sabina's URL | Pending |
