@@ -539,8 +539,8 @@ The common repository stores shared documentation, collaboration files and Git s
 | `services/notification-service` | [vikanicologlo/notification-service](https://github.com/vikanicologlo/notification-service) | Contract README published; linked as submodule |
 | `services/user-management-service` | [MadalinaDev/user-management-service](https://github.com/MadalinaDev/user-management-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule pending owner action |
 | `services/map-service` | [MadalinaDev/map-service](https://github.com/MadalinaDev/map-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule pending owner action |
-| `services/monster-raid-service` | [sabinapopescu/monster-raid-service](https://github.com/sabinapopescu/monster-raid-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule linked, pending owner verification |
-| `services/package-registry-service` | [sabinapopescu/package-registry-service](https://github.com/sabinapopescu/package-registry-service) | URL supplied; contents unverified from this account (private, teammates not invited per lab rules); README + submodule linked, pending owner verification |
+| `services/monster-raid-service` | [sabinapopescu/monster-raid-service](https://github.com/sabinapopescu/monster-raid-service) | Contract README published; linked as submodule |
+| `services/package-registry-service` | [sabinapopescu/package-registry-service](https://github.com/sabinapopescu/package-registry-service) | Contract README published; linked as submodule |
 
 Do not add fake submodules or copy private source into public folders. A real submodule needs a remote URL and an existing commit. To add one from the common repo after the service owner has pushed its README:
 
