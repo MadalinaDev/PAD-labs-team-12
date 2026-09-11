@@ -26,8 +26,8 @@ jobs:
               if (pr.head.ref !== 'dev' || pr.head.repo?.full_name !== context.payload.repository.full_name) {
                 errors.push('Milestone PRs into main must come from this repository\'s dev branch.');
               }
-            } else if (!/^(feat|fix|docs|test|refactor|chore)\/lab-\d+\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(pr.head.ref)) {
-              errors.push('Task branches must use type/lab-N/kebab-description and target dev.');
+            } else if (!/^(feat|fix|docs|test|refactor|chore)\/(?:lab-\d+\/)?[a-z0-9]+(?:-[a-z0-9]+)*$/.test(pr.head.ref)) {
+              errors.push('Task branches must use type/kebab-description (optional lab-N segment) and target dev.');
             }
             for (const heading of ['Summary', 'Verification', 'Contract impact', 'Checklist']) {
               const pattern = new RegExp(`^## ${heading}\\s*$`, 'm');
