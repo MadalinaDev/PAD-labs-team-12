@@ -7,7 +7,7 @@ Keep this file factual: checked means verified, not merely planned. Repository s
 - [x] Record the four members and two services per person.
 - [x] Define all eight service boundaries and data owners in the public README.
 - [x] Add a Mermaid architecture diagram and full interaction table.
-- [x] Record the confirmed TypeScript/NestJS + Java/Spring Boot split and technology trade-offs.
+- [x] Record the confirmed Go + TypeScript/NestJS split and technology trade-offs.
 - [x] Define REST request/response schemas, WebSocket frames and asynchronous events.
 - [x] Define contribution, review, testing and versioning policies.
 - [x] Add a PR template and automated PR-policy workflow.

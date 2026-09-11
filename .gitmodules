@@ -18,7 +18,7 @@
 	url = https://github.com/vikanicologlo/notification-service.git
 [submodule "services/package-registry-service"]
 	path = services/package-registry-service
-	url = git@github.com:sabinapopescu/package-registry-service.git
+	url = https://github.com/sabinapopescu/package-registry-service.git
 [submodule "services/monster-raid-service"]
 	path = services/monster-raid-service
-	url = git@github.com:sabinapopescu/monster-raid-service.git
+	url = https://github.com/sabinapopescu/monster-raid-service.git
