@@ -5,9 +5,11 @@ The directories here are Git submodules pointing to commits in individually owne
 Initialize only repositories you can access:
 
 ```sh
-git submodule update --init services/battle-service services/tamagotchi-service
+git submodule update --init services/battle-service services/tamagotchi-service services/guild-service services/notification-service
 ```
 
 The professor(s) need invitations to each private repository to inspect a full recursive checkout. Teammates retain access only to their own private services; shared contracts remain in the [public README](../README.md).
 
-See the [repository table](../README.md#repository-setup-and-lab-0-checklist) for the remaining service URLs and setup status.
+These private repositories are published on GitHub as private repos and linked as submodules from the public CPR.
+
+See the [repository table](../README.md#repository-setup-and-lab-0-checklist) for the current service URLs and setup status.
