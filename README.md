@@ -40,8 +40,8 @@ flowchart LR
     R["Monster Raid<br/>TypeScript / NestJS"]
     B["Battle<br/>Go"]
     T["Tamagotchi<br/>Go"]
-    G["Guild<br/>TypeScript / NestJS"]
-    N["Notification<br/>TypeScript / NestJS"]
+    G["Guild<br/>Go"]
+    N["Notification<br/>Go"]
     Q[(RabbitMQ)]
     F[Firebase Cloud Messaging]
     C -->|REST / JSON| U & M & P & R & B & T & G & N
@@ -90,12 +90,12 @@ Every service has its **own PostgreSQL database and credentials**. Those eight d
 | Services | Language / framework | Storage | Transports |
 | --- | --- | --- | --- |
 | Battle, Tamagotchi | Go | PostgreSQL | REST/JSON, RabbitMQ |
-| Guild, Notification | TypeScript / NestJS | PostgreSQL | REST/JSON, RabbitMQ; Guild WebSockets; Notification Firebase SDK |
+| Guild, Notification | Go | PostgreSQL | REST/JSON, RabbitMQ; Guild WebSockets; Notification Firebase SDK |
 | User Management, Map | TypeScript / NestJS | PostgreSQL; PostGIS extension for Map; Prisma ORM | REST/JSON, RabbitMQ |
 | Monster Raid, Package Registry | TypeScript / NestJS | PostgreSQL; Prisma ORM | REST/JSON, RabbitMQ |
 
-- **TypeScript / NestJS:** typed DTOs, validation and modules fit accounts, guilds, maps, raids and package configuration, while its WebSocket and Firebase integrations suit chat and notifications. Prisma simplifies PostgreSQL access across the six NestJS services. It needs more initial structure than a minimal HTTP library; runtime validation is still necessary because TypeScript types disappear at runtime.
-- **Go:** single static binary, low memory/startup time and goroutines fit turn-based battle validation and concurrent pet reservation/settlement. Explicit error handling and `database/sql` keep wallet-adjacent settlement logic auditable. Trade-off is more boilerplate than NestJS modules and a smaller Firebase/WebSocket ecosystem, which is why only the two combat-state services use it. Using exactly these two languages (Go + TypeScript) satisfies the course requirement against tooling overhead.
+- **TypeScript / NestJS:** typed DTOs, validation and modules fit accounts, maps, raids and package configuration. Prisma simplifies PostgreSQL access across the four NestJS services. It needs more initial structure than a minimal HTTP library; runtime validation is still necessary because TypeScript types disappear at runtime.
+- **Go:** single static binary, low memory/startup time and goroutines fit turn-based battle validation, concurrent pet reservation/settlement, guild chat fan-out and notification delivery. Explicit error handling and `database/sql` keep settlement logic auditable. Trade-off is more boilerplate than NestJS modules and a less batteries-included WebSocket/Firebase ecosystem, handled here with explicit reconnect/history and delivery-retry logic. Using exactly these two languages (Go + TypeScript, four services each) satisfies the course requirement against tooling overhead.
 - **PostgreSQL:** transactions, unique constraints and row locking protect wallets, pet ownership and concurrent turns. Tamagotchi uses JSONB for different packages' care values, validated against Registry definitions. PostgreSQL per service simplifies tooling, but a single local server shares a failure domain.
 - **PostGIS:** indexed geographic distance queries avoid scanning every location. This adds an extension to operate. The six-metre proximity threshold is a gameplay approximation, not a promise of GPS precision.
 - **REST / JSON:** inspectable payloads, easy support in both stacks (Go and TypeScript) and immediate responses for turns and reads. More verbose than Protobuf; cross-service HTTP calls need bounded timeouts and cannot provide a distributed database transaction.
