@@ -34,14 +34,14 @@ Lab 0 plans a microservice backend where independently developed pet-care apps s
 ```mermaid
 flowchart LR
     C[Package clients]
-    U["User Management<br/>Java / Spring Boot"]
-    M["Map<br/>Java / Spring Boot"]
+    U["User Management<br/>TypeScript / NestJS"]
+    M["Map<br/>TypeScript / NestJS"]
     P["Package Registry<br/>TypeScript / NestJS"]
     R["Monster Raid<br/>TypeScript / NestJS"]
-    B["Battle<br/>TypeScript / NestJS"]
-    T["Tamagotchi<br/>TypeScript / NestJS"]
-    G["Guild<br/>TypeScript / NestJS"]
-    N["Notification<br/>TypeScript / NestJS"]
+    B["Battle<br/>Go"]
+    T["Tamagotchi<br/>Go"]
+    G["Guild<br/>Go"]
+    N["Notification<br/>Go"]
     Q[(RabbitMQ)]
     F[Firebase Cloud Messaging]
     C -->|REST / JSON| U & M & P & R & B & T & G & N
@@ -89,15 +89,16 @@ Every service has its **own PostgreSQL database and credentials**. Those eight d
 
 | Services | Language / framework | Storage | Transports |
 | --- | --- | --- | --- |
-| Battle, Tamagotchi, Monster Raid, Package Registry | TypeScript / NestJS | PostgreSQL | REST/JSON, RabbitMQ |
-| Guild, Notification | TypeScript / NestJS | PostgreSQL | REST/JSON, RabbitMQ; Guild WebSockets; Notification Firebase SDK |
-| User Management, Map | Java / Spring Boot | PostgreSQL; PostGIS extension for Map | REST/JSON, RabbitMQ |
+| Battle, Tamagotchi | Go | PostgreSQL | REST/JSON, RabbitMQ |
+| Guild, Notification | Go | PostgreSQL | REST/JSON, RabbitMQ; Guild WebSockets; Notification Firebase SDK |
+| User Management, Map | TypeScript / NestJS | PostgreSQL; PostGIS extension for Map; Prisma ORM | REST/JSON, RabbitMQ |
+| Monster Raid, Package Registry | TypeScript / NestJS | PostgreSQL; Prisma ORM | REST/JSON, RabbitMQ |
 
-- **TypeScript / NestJS:** typed DTOs, validation and modules fit pet state and turn-based combat, while its WebSocket and Firebase integrations suit Vica's services; Sabina's raid/registry services also use it for the same typed-DTO and validation-module fit (immutable definitions, versioned care stats, raid state machines). It needs more initial structure than a minimal HTTP library; runtime validation is still necessary because TypeScript types disappear at runtime.
-- **Java / Spring Boot:** transaction support and validation fit wallets and PostGIS-backed concurrent writes. Java types also make cross-service DTOs explicit. Startup time, memory use and configuration are greater than lightweight frameworks. Two languages are used to satisfy the course requirement; the split follows each owner's tooling choice rather than an even service count per language.
+- **TypeScript / NestJS:** typed DTOs, validation and modules fit accounts, maps, raids and package configuration. Prisma simplifies PostgreSQL access across the four NestJS services. It needs more initial structure than a minimal HTTP library; runtime validation is still necessary because TypeScript types disappear at runtime.
+- **Go:** single static binary, low memory/startup time and goroutines fit turn-based battle validation, concurrent pet reservation/settlement, guild chat fan-out and notification delivery. Explicit error handling and `database/sql` keep settlement logic auditable. Trade-off is more boilerplate than NestJS modules and a less batteries-included WebSocket/Firebase ecosystem, handled here with explicit reconnect/history and delivery-retry logic. Using exactly these two languages (Go + TypeScript, four services each) satisfies the course requirement against tooling overhead.
 - **PostgreSQL:** transactions, unique constraints and row locking protect wallets, pet ownership and concurrent turns. Tamagotchi uses JSONB for different packages' care values, validated against Registry definitions. PostgreSQL per service simplifies tooling, but a single local server shares a failure domain.
 - **PostGIS:** indexed geographic distance queries avoid scanning every location. This adds an extension to operate. The six-metre proximity threshold is a gameplay approximation, not a promise of GPS precision.
-- **REST / JSON:** inspectable payloads, easy support in both stacks and immediate responses for turns and reads. More verbose than Protobuf; cross-service HTTP calls need bounded timeouts and cannot provide a distributed database transaction.
+- **REST / JSON:** inspectable payloads, easy support in both stacks (Go and TypeScript) and immediate responses for turns and reads. More verbose than Protobuf; cross-service HTTP calls need bounded timeouts and cannot provide a distributed database transaction.
 - **RabbitMQ:** durable asynchronous notification and scheduling events decouple producers from consumer availability. Adds broker operation, duplicate handling and eventual consistency. Critical reward settlement uses explicit idempotent APIs and a persisted coordinator rather than assuming event delivery is exactly once.
 - **WebSockets:** required real-time guild chat without polling. Requires reconnect/history recovery and membership rechecks. Initial battles and raids use REST commands/polling; the assignment does not require a battle WebSocket.
 - **Firebase Cloud Messaging:** fulfills the topic's push requirement. Requires a Firebase project, server credentials, client registration/permission and platform configuration (HTTPS and a service worker for web). A successful Firebase send is not proof that a user saw the message; the Notification inbox is durable.
